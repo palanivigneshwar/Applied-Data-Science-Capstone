@@ -45,8 +45,6 @@ app.layout = html.Div(children=[
     #dcc.RangeSlider(id='payload-slider',...)
     dcc.RangeSlider(id='payload-slider',
                 min=0, max=10000, step=1000,
-                # marks={0: '0',
-                #        100: '100'},
                 value=[min_payload, max_payload]),
 
     # TASK 4: Add a scatter chart to show the correlation between payload and launch success
@@ -67,8 +65,7 @@ def get_pie_chart(entered_site):
         return fig
     else:
         # return the outcomes piechart for a selected site
-        filtered_df = filtered_df[filtered_df['Launch Site'] == entered_site]
-        fig = px.pie(filtered_df, #values='class', # no need to use value 1 to calc, just count 0 or 1
+        fig = px.pie(filtered_df[filtered_df['Launch Site'] == entered_site], #values='class', # no need to use value 1 to calc, just count 0 or 1
                     names='class', 
                     title=f'Total Success Launches for {entered_site}')
         return fig
